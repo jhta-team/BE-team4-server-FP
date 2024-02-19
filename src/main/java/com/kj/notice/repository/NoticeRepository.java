@@ -20,41 +20,41 @@ public interface NoticeRepository extends JpaRepository<Notice,Long> {
 
     @Query(value = "SELECT *" +
             "FROM (SELECT n.*, ROWNUM AS num FROM" +
-            "(SELECT * FROM NOTICE ORDER BY notice_date asc) n) where num BETWEEN :no-1 AND :no+1",nativeQuery = true)
+            "(SELECT * FROM notice ORDER BY notice_date asc) n) where num BETWEEN :no-1 AND :no+1",nativeQuery = true)
     List<Notice> findByBetweenNum(@Param("no") int no);
 
     @Query(value ="SELECT *" +
             "FROM notice WHERE id = " +
-            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findPreNotice(@Param("id") Long id);
 
     @Query(value ="SELECT *" +
             "FROM notice WHERE id = " +
-            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findNextNotice(@Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE notice_title like %:keyword% and id = " +
-            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchTitleNextNotice(@Param("keyword") String keyword, @Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE notice_title like %:keyword% and id = " +
-            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchTitleprevNotice(@Param("keyword") String keyword, @Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE notice_category like %:keyword% and id = " +
-            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchCategoryNextNotice(@Param("keyword") String keyword, @Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE notice_category like %:keyword% and id = " +
-            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchCategoryprevNotice(@Param("keyword") String keyword, @Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE (notice_category like %:keyword% or notice_title like %:keyword%) and id = " +
-            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LEAD(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchAllNextNotice(@Param("keyword") String keyword, @Param("id") Long id);
     @Query(value ="SELECT *" +
             "FROM notice WHERE (notice_category like %:keyword% or notice_title like %:keyword%) and id = " +
-            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM NOTICE) B WHERE id = :id)" ,nativeQuery = true)
+            "(SELECT prev_no FROM (SELECT id, LAG(id, 1, -1) OVER(ORDER BY id) AS prev_no FROM notice) B WHERE id = :id)" ,nativeQuery = true)
     Notice findSearchAllprevNotice(@Param("keyword") String keyword, @Param("id") Long id);
 
 

@@ -10,18 +10,18 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-    @Query(value = "with recursive CTE as " +
+    @Query(value = "with recursive cte as " +
             "(" +
             " select nc1.*, 0,cast(id as char(200)) as path from notice_comment nc1 where parent_id IS null and notice_id =:idx  union all " +
             " select nc2.*, c.depth +1,  CONCAT(c.path, '-', nc2.id) from notice_comment nc2 " +
-            " inner join CTE c on nc2.parent_id = c.id" +
+            " inner join cte c on nc2.parent_id = c.id" +
             ")" +
             "select * from cte order by path",
-            countQuery ="with recursive CTE as " +
+            countQuery ="with recursive cte as " +
                     "(" +
                     " select nc1.*, 0,cast(id as char(200)) as path from notice_comment nc1 where parent_id IS null and notice_id =:idx  union all " +
                     " select nc2.*, c.depth +1,  CONCAT(c.path, '-', nc2.id) from notice_comment nc2 " +
-                    " inner join CTE c on nc2.parent_id = c.id" +
+                    " inner join cte c on nc2.parent_id = c.id" +
                     ")" +
                     "select count(*) from cte order by path",nativeQuery = true)
     List<Comment> findByNoticeIds(@Param("idx") Long id);

@@ -260,6 +260,17 @@
     </div>
 
     <script th:inline="javascript">
+        $("#flexSwitchCheckChecked").on("click",function(){
+                       $("#flexSwitchCheckChecked").val(1);
+                       $('#flexSwitchCheckChecked').toggleClass('active');
+
+                    if( $('#flexSwitchCheckChecked').hasClass('active') == true ){
+                        $('#qnaPassword').attr("disabled",false);
+                    }
+                    else{
+                        $('#qnaPassword').attr("disabled",true);
+                    }
+                    })
             $(".check").on("click",function(){
                 let qnaId = $(this).data("no");
                 console.log(qnaId);

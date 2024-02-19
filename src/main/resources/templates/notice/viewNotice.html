@@ -242,28 +242,27 @@
                             if(response.insert == "ok"){
                              alert("댓글등록");
                              location.reload();
-                            function getFullYmdStr(){
+                            //function getFullYmdStr(){
                                 //년월일시분초 문자열 생성
-                                var d = new Date();
-                                return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
-                            }
-                            sonHtml+=`<li class="list-group-item">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-1">${response.comments.writer.userId}</h6>
-                                        <small>${getFullYmdStr()}</small>
-                                    <p class="mb-1">${response.comments.commentContent}</p>
-                                    <div>
-                                    <button class="btn btn-primary btnComment" data-no="${response.comments.id}" value="${response.comments.id}">대댓글 작성</button>
-                                    <button class="btn btn-secondary">댓글 수정</button>
-                                    <button class="btn btn-danger">댓글 삭제</button>
-                            </div>
-                            </div>
-                            <div class="feed-list">
+                            //    var d = new Date();
+                            //    return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
+                            //}
+                            //sonHtml+=`<li class="list-group-item">
+                            //        <div class="d-flex w-100 justify-content-between">
+                            //            <h6 class="mb-1">${response.comments.writer.userId}</h6>
+                            //            <small>${getFullYmdStr()}</small>
+                            //        <p class="mb-1">${response.comments.commentContent}</p>
+                            //        <div>
+                            //        <button class="btn btn-primary btnComment" data-no="${response.comments.id}" value="${response.comments.id}">대댓글 작성</button>
+                            //        <button class="btn btn-secondary">댓글 수정</button>
+                            //        <button class="btn btn-danger">댓글 삭제</button>
+                            //</div>
+                            //</div>
+                            //<div class="feed-list">
+                            //</div>
+                            //    </li>`
 
-                            </div>
-                                </li>
-                                `
-                                commentList.append(sonHtml);
+                            //    commentList.append(sonHtml);
                             }
                         },
                        fail:function(data){
