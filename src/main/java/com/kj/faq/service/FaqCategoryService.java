@@ -25,11 +25,11 @@ public class FaqCategoryService {
             throw  new FaqCategoryException(ErrorCode. INVALID_REQUEST_CATEGORY);
         }else {
         Optional<FaqCategory> checkFaqCategory = faqCategoryRepository.findBySmallFaqCategory(SmallFaqCategory.valueOf(faqCategoryDto.getSmallFaqCategory()));
-        if(!checkFaqCategory.isPresent()){
+        if(checkFaqCategory.isPresent()){
+        throw  new FaqCategoryException(ErrorCode.DUPLICATE_CATEGORY);
+        }
         FaqCategory insertCategory = FaqCategoryDto.toEntity(faqCategoryDto);
         faqCategoryRepository.save(insertCategory);
-        }
-        throw  new FaqCategoryException(ErrorCode.DUPLICATE_CATEGORY);
         }
     }
 

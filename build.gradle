@@ -76,6 +76,9 @@ dependencies {
 //	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
 	//spring batch
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	//
+	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+
 
 }
 

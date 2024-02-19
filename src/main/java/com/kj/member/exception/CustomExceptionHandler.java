@@ -92,7 +92,7 @@ public class CustomExceptionHandler {
                 .errorCode(e.getErrorCode())
                 .errorMessage(e.getErrorCode().getMessage())
                 .build();
-        redirectAttributes.addAttribute("error",response);
+        redirectAttributes.addAttribute("error",response.getErrorCode());
         redirectAttributes.addAttribute("exception",response.getErrorMessage());
         return "redirect:/cs/insertFaqCategory";
     }

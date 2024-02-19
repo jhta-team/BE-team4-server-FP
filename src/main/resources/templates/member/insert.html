@@ -10,7 +10,7 @@
                 <form action="" th:action="@{/member/insert}" th:object="${joinDto}" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="userId" class="form-label">userId</label>
-                        <input type="text" class="form-control" id="userId" placeholder="title" name="userId"  th:field="*{userId}" required>
+                        <input type="text" class="form-control" id="userId" placeholder="ID" name="userId"  th:field="*{userId}" required>
                         <button class="btn btn-primary" id="btnIDCheck" >아이디 중복 확인</button>
                         <div class="error" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">
                             오류 메세지...</div>
@@ -547,6 +547,25 @@
                   postcode();
                   return false;
               })
+              function phoneCheck(){
+                  let phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+                  let phone =$("#phone").val().trim();
+                  if(phoneRegex.test(phone)){
+                      return true;
+                  }
+                  return false;
+              };
+
+              $("#phone").on("keyup",function(){
+                if(phoneCheck()){
+    		    $("#invalid-feedbackTel").hide();
+    		        isPhoneCheck=true;
+    	        }else{
+    		    $("#invalid-feedbackTel").show();
+    		    $("#invalid-feedbackTel").text("핸드폰번호를 입력해주세요")
+    	        }
+
+              })
             //닉네임 체크
              $("#btnNickNameCheck").on("click", function(){
                   $.ajax({
@@ -569,6 +588,7 @@
         							$("#nickName").removeClass("is-invalid")
             		    	        $("#nickName").addClass("is-valid")
           					  		$("#nickName").attr("readonly",false);
+          					  		isNickNameCheck = true;
           					  		}
         						  }else{
         							  alert("공란입니다. 다시입력해주세여");

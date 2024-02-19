@@ -86,7 +86,11 @@ public class MemberDto {
         memberDto.setAddressDetail(member.getAddressDetail());
         memberDto.setPostCode(member.getPostCode());
         memberDto.setEmail(member.getEmail());
+        if(member.getMobile().getValue() ==null){
+            memberDto.setMobile(null);
+        }else {
         memberDto.setMobile(member.getMobile().getValue());
+        }
         memberDto.setRole(member.getRole().getValue());
         memberDto.setPhone(member.getPhone());
         memberDto.setProfileImageUrl(member.getProfileImageUrl());

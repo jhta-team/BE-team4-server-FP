@@ -12,10 +12,10 @@ public interface FaqBoardRepository extends JpaRepository<FaqBoard,Long> {
     Page<FaqBoard> findByAll(Pageable pageable);
 
     @Query(value = "SELECT * " +
-            "FROM FAQ_BOARD fb " +
+            "FROM faq_board fb " +
             "WHERE FAQ_CATEGORY_ID IN  (" +
             "    SELECT FAQ_CATEGORY_ID " +
-            "    FROM FAQ_CATEGORY fc " +
+            "    FROM faq_category fc " +
             "    WHERE BIG_FAQ_CATEGORY = :keyword)",nativeQuery = true)
     Page<FaqBoard> findByCategory(Pageable pageable, @Param("keyword") String keyword);
 }
